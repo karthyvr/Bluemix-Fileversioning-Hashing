@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Python Flask Starter Application</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="static/stylesheets/style.css">
+
+    <title>Cloud Computing Assignment 2</title>
+  </head>
+  <body>
+   <h1>Cloud Computing Assignment 2</h1>
+   <br/>
+   <h3><a href="/index">Home</a></h3>
+   <br/>
+   {% if result_msg %}
+        <h3>{{ result_msg }}</h3>
+   {% endif %}
+    <h2>List of Files in Cloudant DB</h2>
+    <table>
+       <tr border="5">
+          <th><h3>File Name</h3></th>
+          <th><h3>Version #</h3></th>
+          <th><h3>Hash</h3></th>
+          <th><h3>Download</h3></th>
+          <th><h3>Delete</h3></th>
+        </tr>
+        {% for i in files_list %}
+        <form action="/deleteordownload">
+        <tr>
+          <td nowrap>{{ i['filename'] }}</td>
+          <td>{{ i['version'] }} </td>
+          <td nowrap width="800">{{ i['hash_value'] }}</td>
+            <input type="hidden" name="filename" value="{{ i['filename'] }}">
+            <input type="hidden" name="version" value="{{ i['version']}}">
+            <td><input type=submit value="Download" name="operation"></td>
+            <td><input type=submit value="Delete" name="operation"></td>
+        </tr>
+</form>
+       {% endfor %}
+    </table>
+  </body>
+
+
+</html>
